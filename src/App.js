@@ -8,9 +8,11 @@ import Navbar from './components/Navbar'
 
 import { Home } from './pages/home/index'
 import { Events } from './pages/events/index'
-import { Add } from './pages/events/add/index'
+import { Event } from './pages/event/index'
+import { Add } from './pages/addEvent/index'
+import { Edit } from './pages/editEvent/index'
 
-import './App.css';
+// import './App.css';
 
 function App() {
   const { user, loading } = useAuth()
@@ -25,8 +27,10 @@ function App() {
           <Routes>
             <Route path='/' element={<Navbar />}>
               <Route index element={<Home />} />
-              <Route path='/events' element={<Events />} />
-              <Route path='/events/add' element={<Add />} />
+              <Route path='events' element={<Events />} />
+              <Route path='events/add' element={<Add />} />
+              <Route path='events/:id' element={<Event />} />
+              <Route path='events/:id/edit' element={<Edit />} />
             </Route>
           </Routes>
         </div>

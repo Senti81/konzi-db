@@ -1,11 +1,15 @@
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import pic from '../../icons/logo.webp'
 import useAuth from '../../hooks/useAuth'
+import useEvents from '../../hooks/useEvents'
+import { useEffect } from 'react'
 
 export const Home = () => {
-
   const { user } = useAuth()
+  const { events, fetchEvents } = useEvents()
   
+  useEffect(() => { fetchEvents(true)}, [user])
+
   return (
     <div className="container mt-3">
       <div className="px-4 py-5 my-5 text-center rounded-3 border shadow-lg">
@@ -22,25 +26,25 @@ export const Home = () => {
 
     <div className="container">
       <p className="display-6">Zuletzt hinzugefügt:</p>
-     {/* <div className="row">
-      {games.map((game) => (
-       <div className="col-sm-6 col-lg-4 mb-3 mb-sm-3 shadow-md" key={game.id}>
+     <div className="row">
+      {events.map((event) => (
+       <div className="col-sm-6 col-lg-4 mb-3 mb-sm-3 shadow-md" key={event.id}>
          <div className="card">
           <div className="card-body">
-             <h5 className="card-title">{game.name}</h5>
-             <p className="card-text">{game?.notes}</p>
+             <h5 className="card-title">{event.band}</h5>
+             <p className="card-text">{event?.notes}</p>
              <Link
-              to={`/games/${game.id}`}
-              state={{ game }}
+              to={`/events/${event.id}`}
+              state={{ event }}
               className="btn btn-outline-info"
               > Details
              </Link>
-             <h6 className="card-subtitle text-body-secondary mt-3 small">Added: {game.createdAt.toDate().toLocaleString('de-DE', {dateStyle: 'long'})}</h6>
+             <h6 className="card-subtitle text-body-secondary mt-3 small">Added: {event.createdAt.toDate().toLocaleString('de-DE', {dateStyle: 'long'})}</h6>
            </div>
         </div>
       </div>    
       ))}
-    </div>     */}
+    </div>    
    </div>
   </div>
   )
