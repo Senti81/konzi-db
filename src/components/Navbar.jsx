@@ -17,26 +17,25 @@ const Navbar = () => {
               <li className='nav-item active d-none d-sm-block'>
                 <NavLink
                   className={({ isActive }) => "nav-link" + (isActive ? " border-bottom border-black border-1" : "")}
-                  to="/games"
+                  to="events"
                   end
                   >
-                  Games
+                  Events
                 </NavLink>              
-              </li>
-
-              <li className='nav-item active d-none d-sm-block'>
+              </li>             
+              <li className="nav-item d-block d-sm-none">
                 <NavLink
-                  className={({ isActive }) => "nav-link" + (isActive ? " border-bottom border-black border-1" : "")}
-                  to="/games/add"
+                  className={({ isActive }) => "nav-link" + (isActive ? " bg-secondary text-light rounded px-3" : " px-3")}
+                  to="events"
                   end
                   >
-                  Add
-                </NavLink>              
-              </li>
+                  <i className="bi bi-calendar-event"></i>
+                </NavLink>
+              </li>             
             </ul>
             <ul className='navbar-nav ms-auto'>
               <li className="nav-item d-none d-sm-block">
-                <a className="nav-link text-danger" href="#" onClick={logout}>Abmelden</a>
+                <button className="nav-link text-danger" onClick={logout}>Abmelden</button>
               </li>
               <li className="nav-item d-block d-sm-none">
                 <i className="bi bi-box-arrow-right text-danger fs-3" onClick={logout}/>
