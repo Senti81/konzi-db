@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import useEvents from "../../hooks/useEvents"
 
 export const Add = () => {
@@ -54,7 +54,10 @@ export const Add = () => {
         <input type="text" className="form-control" id="floatingBemerkungen" placeholder="Bemerkungen" value={notes} onChange={(e) => setNotes(e.target.value)} />
         <label htmlFor="floatingBemerkungen">Bemerkungen</label>
       </div>
-      <button className="btn btn-primary rounded" onClick={handleSubmit}>Submit</button>
+      <div className="d-flex justify-content-between">
+        <button className="btn btn-primary rounded" onClick={handleSubmit}>Submit</button>
+        <Link className="btn btn-outline-secondary rounded" to={'/'}>Abbrechen</Link>
+      </div>
     </div>
   )
 }
