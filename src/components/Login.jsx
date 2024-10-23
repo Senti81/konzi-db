@@ -7,7 +7,7 @@ const Login = () => {
   const { login } = useAuth()
   return (
     <div className="container-fluid d-flex flex-column align-items-center justify-content-center vh-100 login-container">
-      <p className="display-5">The Games DB</p>
+      <p className="display-5">Konzi DB</p>
       <img src={logo} alt="The Games DB" className="logo-image" />
         <button className="btn btn-primary login-btn" onClick={login}>
         <img

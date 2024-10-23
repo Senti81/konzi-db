@@ -11,7 +11,7 @@ const Navbar = () => {
         <div className='container-fluid'>
           <div className="navbar-collapse d-flex align-items-center justify-content-between" id="navbarNav">
             <a className="navbar-brand" href="/">
-              <img src={brand} alt="Bootstrap" width="30" height="30"/>
+              <img src={brand} className='rounded-2' alt="Konzi DB" width="30" height="30"/>
             </a>
             <ul className="navbar-nav flex-row">
               <li className='nav-item active d-none d-sm-block'>
