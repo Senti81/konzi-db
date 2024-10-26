@@ -12,7 +12,9 @@ export const Events = () => {
     <div className="container">
       <div className="display-3">Eventkalender</div>
       <ul className="list-group">
-        {events.map((event) => (
+        {events
+        .filter((event) => event.userId === user.uid)
+        .map((event) => (
           <Link
             key={event.id}
             className="list-group-item"

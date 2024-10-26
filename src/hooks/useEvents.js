@@ -35,7 +35,7 @@ const useEvents = () => {
     setLoading(true)
     setError(null)
     try {
-      const eventData = { date, band, city, location, type, notes, createdAt: Timestamp.now() }
+      const eventData = { userId: user.uid, date, band, city, location, type, notes, createdAt: Timestamp.now() }
       await addDoc(collection(db, 'events'), eventData)
       return { success: true, message: 'Event erfolgreich hinzugefügt' }
     } catch (error) {
