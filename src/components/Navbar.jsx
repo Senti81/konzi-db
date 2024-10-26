@@ -20,7 +20,7 @@ const Navbar = () => {
                   to="events"
                   end
                   >
-                  Events
+                  Eventkalender
                 </NavLink>              
               </li>             
               <li className="nav-item d-block d-sm-none">

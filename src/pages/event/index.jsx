@@ -25,7 +25,7 @@ export const Event = () => {
             state={{ event }}
             className="btn btn-outline-warning"
           >
-            Edit
+            Bearbeiten
           </Link>
           <button className="btn btn-danger ms-5" onClick={handleDelete}>Löschen</button>
         </div>

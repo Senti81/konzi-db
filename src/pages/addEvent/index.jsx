@@ -55,7 +55,7 @@ export const Add = () => {
         <label htmlFor="floatingBemerkungen">Bemerkungen</label>
       </div>
       <div className="d-flex justify-content-between">
-        <button className="btn btn-primary rounded" onClick={handleSubmit}>Submit</button>
+        <button className="btn btn-primary rounded" onClick={handleSubmit}>Speichern</button>
         <Link className="btn btn-outline-secondary rounded" to={'/'}>Abbrechen</Link>
       </div>
     </div>
