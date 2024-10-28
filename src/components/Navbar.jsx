@@ -4,7 +4,7 @@ import { Outlet, NavLink } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 
 const Navbar = () => {
-  const { logout } = useAuth()
+  const { user, logout } = useAuth()
   return (
     <>
       <nav className="navbar fixed-top navbar-expand-sm bg-body-tertiary">
@@ -35,10 +35,27 @@ const Navbar = () => {
             </ul>
             <ul className='navbar-nav ms-auto'>
               <li className="nav-item d-none d-sm-block">
-                <button className="nav-link text-danger" onClick={logout}>Abmelden</button>
+                <NavLink
+                  className={({ isActive }) => "nav-link" + (isActive ? " bg-secondary text-light rounded px-3" : " px-3")}
+                  to="profile"
+                  end
+                  >
+                  Mein Profil
+                </NavLink>  
               </li>
               <li className="nav-item d-block d-sm-none">
-                <i className="bi bi-box-arrow-right text-danger fs-3" onClick={logout}/>
+              <NavLink
+                  className="nav-link px-3"
+                  to="profile"
+                  end
+                  >
+                <img
+                  src={user?.photoURL}
+                  alt="Google Profile"
+                  className="profile-pic"
+                  style={{ width: '30px', height: '30px', borderRadius: '50%' }}
+                />
+                </NavLink>
               </li>
             </ul>
           </div>

@@ -11,6 +11,7 @@ import { Events } from './pages/events/index'
 import { Event } from './pages/event/index'
 import { Add } from './pages/addEvent/index'
 import { Edit } from './pages/editEvent/index'
+import { Profile } from './pages/profile/index'
 
 // import './App.css';
 
@@ -27,6 +28,7 @@ function App() {
           <Routes>
             <Route path='/' element={<Navbar />}>
               <Route index element={<Home />} />
+              <Route path='profile' element={<Profile />} />
               <Route path='events' element={<Events />} />
               <Route path='events/add' element={<Add />} />
               <Route path='events/:id' element={<Event />} />
