@@ -13,8 +13,6 @@ import { Add } from './pages/addEvent/index'
 import { Edit } from './pages/editEvent/index'
 import { Profile } from './pages/profile/index'
 
-// import './App.css';
-
 function App() {
   const { user, loading } = useAuth()
 

@@ -6,7 +6,7 @@ import useAuth from "../../hooks/useAuth"
 
 export const Profile = () => {
   const { user, logout } = useAuth()
-  const { importEvents, exportEvents, loading } = useEvents()
+  const { importEvents, exportEvents, loading, error } = useEvents()
 
   const [ selectedFile, setSelectedFile ] = useState(null)
 
@@ -23,8 +23,8 @@ export const Profile = () => {
 
   const handleImport = async () => {
     if (selectedFile) {
-      await importEvents(selectedFile)
-      navigate('/')
+      const result = await importEvents(selectedFile)
+      if (result?.success) navigate('/')
     }
   }
 
@@ -41,7 +41,7 @@ export const Profile = () => {
           <div className="me-3">
             <img 
               src={user?.photoURL} 
-              alt="User Photo" 
+              alt="UserPic" 
               className="rounded-circle" 
               style={{ width: '80px', height: '80px', objectFit: 'cover' }}
             />
@@ -58,7 +58,7 @@ export const Profile = () => {
           <div className="h-100 card shadow">
             <div className="card-body">
               <h5 className="card-title">Daten exportieren</h5>
-              <p className="card-text">Es werden alle Daten in JSON Format heruntergeladen</p>
+              <p className="card-text">Hier kannst du alle Events als JSON exportieren</p>
               <button className="btn btn-outline-primary" onClick={handleExport}>Exportieren</button>
             </div>
           </div>
@@ -67,10 +67,16 @@ export const Profile = () => {
           <div className="h-100 card shadow">
             <div className="card-body">
               <h5 className="card-title">Daten importieren</h5>
-              <p className="card-text">fghfgh</p>
+              <p className="card-text"><small>Import von Event-Daten. Muss im Format JSON sein</small></p>
               <div className="mb-3">
                 <input className="form-control" type="file" accept="application/json" id="formFile" onChange={handleFileChange}/>
               </div>
+              {error && (
+                <div className="alert alert-danger alert-dismissible fade show" role="alert">
+                  {error}
+                  <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+              )}
               <button className="btn btn-outline-primary" disabled={!selectedFile} onClick={handleImport}>Importieren</button>
             </div>
           </div>
@@ -79,7 +85,7 @@ export const Profile = () => {
           <div className="h-100 card shadow">
             <div className="card-body">
               <h5 className="card-title">Abmelden</h5>
-              <p className="card-text">fghfgh</p>
+              <p className="card-text"></p>
               <button className="btn btn-outline-danger" onClick={handleLogout}>Ausloggen</button>
             </div>
           </div>

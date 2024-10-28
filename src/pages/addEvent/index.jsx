@@ -30,6 +30,14 @@ export const Add = () => {
 
   return (
     <div className="container">
+      <div className="display-6 mb-3">Neues Event hinzufügen</div>
+
+      {/* Draft Banner */}
+      <div className="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Hinweis!</strong> Die Seite ist noch im Entwurfsstatus. Fehler können passieren 🤣
+        <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+
       <div className="form-floating mb-3">
         <input type="date" className="form-control" id="floatingDatum" placeholder="Datum" value={datum} onChange={(e) => setDatum(e.target.value)} />
         <label htmlFor="floatingDatum">Datum</label>

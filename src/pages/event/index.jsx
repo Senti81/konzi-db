@@ -16,6 +16,13 @@ export const Event = () => {
   
   return (
     <div className="container">
+
+      {/* Draft Banner */}
+      <div className="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Hinweis!</strong> Die Seite ist noch im Entwurfsstatus. Fehler können passieren 🤣
+        <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      
       <div className="card" style={{ width: '18rem'}}>
         <div className="card-body">
           <h5 className="card-title">{event?.band}</h5>

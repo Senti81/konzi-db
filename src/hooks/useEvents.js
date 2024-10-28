@@ -1,6 +1,6 @@
 import { useState } from "react"
 import useAuth from "./useAuth"
-import { addDoc, collection, deleteDoc, doc, getDocs, limit, onSnapshot, orderBy, query, Timestamp, where } from "firebase/firestore"
+import { addDoc, collection, deleteDoc, doc, getDocs, limit, onSnapshot, orderBy, query, Timestamp } from "firebase/firestore"
 import { db } from "../config/firebase"
 import { saveAs } from "file-saver"
 
@@ -60,20 +60,32 @@ const useEvents = () => {
   // IMPORT
   const importEvents = async (file) => {
     setLoading(true)
+    setError(null)
     try {
       const fileContent = await file.text()
       const eventsData = JSON.parse(fileContent)
 
+      const expectedKeys = ["datum", "band", "stadt", "location", "typ", "bemerkung"];
+
       for (const event of eventsData) {
+        const eventKeys = Object.keys(event);
+        if (
+          eventKeys.length !== expectedKeys.length || 
+          !expectedKeys.every(key => eventKeys.includes(key))
+        ) {
+          setError('Fehler in JSON Daten')
+          return
+        }
         await addDoc(collection(db, 'events'), {
           ...event,
           userId: user.uid,
           createdAt: Timestamp.now()
         })
       }
-      console.log('Import erfolgreich')
+      return { success: true, message: 'Import erfolgreich' }
     } catch (error) {
-      console.error('Fehler beim Import:', error)
+      setError(error)
+      return { success: false, message: error.message }
     } finally {
       setLoading(false)
     }

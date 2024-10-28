@@ -18,7 +18,7 @@ export const Home = () => {
         </div>
         <div className="col-lg-6 text-start">
           <h1 className="display-5 fw-bold text-body-emphasis">Hey {user?.displayName.split(' ')[0]}</h1>
-          <p className="lead mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae animi magnam porro sed sint non voluptates dignissimos minima ad voluptatibus id tempora, dolor cumque fugit. Facere maiores iure dolores placeat?</p>
+          <p className="lead mb-4">Soll hier ein Text stehen? Wenn ja welcher?</p>
           <div className="d-grid gap-2 d-sm-flex justify-content-sm-start">
             <NavLink to="events/add" type="button" className="btn btn-primary btn-lg rounded-5 px-4">Neues Event hinzufügen</NavLink>
             <NavLink to="events" type="button" className="btn btn-outline-secondary rounded-5 btn-lg px-4">Zum Eventkalender</NavLink>
