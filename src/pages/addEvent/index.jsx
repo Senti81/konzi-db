@@ -4,25 +4,25 @@ import useEvents from "../../hooks/useEvents"
 
 export const Add = () => {
 
-  const [ date, setDate ] = useState('')
+  const [ datum, setDatum ] = useState('')
   const [ band, setBand ] = useState('')
-  const [ city, setCity ] = useState('')
+  const [ stadt, setStadt ] = useState('')
   const [ location, setLocation ] = useState('')
-  const [ type, setType ] = useState('')
+  const [ typ, setTyp ] = useState('')
   const [ bemerkung, setBemerkung ] = useState('')
 
   const { addEvent } = useEvents()
   const navigate = useNavigate()
 
   const handleSubmit = async () => {
-    const result = await addEvent(date, band, city, location, type, bemerkung)
+    const result = await addEvent(datum, band, stadt, location, typ, bemerkung)
     console.log(result.message)
 
-    setDate('')
+    setDatum('')
     setBand('')
-    setCity('')
+    setStadt('')
     setLocation('')
-    setType('')
+    setTyp('')
     setBemerkung('')
  
     navigate('/events')
@@ -31,7 +31,7 @@ export const Add = () => {
   return (
     <div className="container">
       <div className="form-floating mb-3">
-        <input type="date" className="form-control" id="floatingDatum" placeholder="Datum" value={date} onChange={(e) => setDate(e.target.value)} />
+        <input type="date" className="form-control" id="floatingDatum" placeholder="Datum" value={datum} onChange={(e) => setDatum(e.target.value)} />
         <label htmlFor="floatingDatum">Datum</label>
       </div>
       <div className="form-floating mb-3">
@@ -39,7 +39,7 @@ export const Add = () => {
         <label htmlFor="floatingBand">Band</label>
       </div>
       <div className="form-floating mb-3">
-        <input type="text" className="form-control" id="floatingStadt" placeholder="Stadt" value={city} onChange={(e) => setCity(e.target.value)} />
+        <input type="text" className="form-control" id="floatingStadt" placeholder="Stadt" value={stadt} onChange={(e) => setStadt(e.target.value)} />
         <label htmlFor="floatingStadt">Stadt</label>
       </div>
       <div className="form-floating mb-3">
@@ -47,7 +47,11 @@ export const Add = () => {
         <label htmlFor="floatingLocation">Location</label>
       </div>
       <div className="form-floating mb-3">
-        <input type="text" className="form-control" id="floatingTyp" placeholder="Typ" value={type} onChange={(e) => setType(e.target.value)} />
+        <select className="form-select" id="floatingTyp" value={typ} onChange={(e) => setTyp(e.target.value)}>
+          <option defaultValue='Konzert'>Wähle aus</option>
+          <option value="Konzert">Konzert</option>
+          <option value="Festival">Festival</option>
+        </select>
         <label htmlFor="floatingTyp">Typ</label>
       </div>
       <div className="form-floating mb-3">

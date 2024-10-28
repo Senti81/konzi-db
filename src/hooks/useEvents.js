@@ -15,7 +15,7 @@ const useEvents = () => {
     if (!user) return
     setLoading(true)
     setError(null)
-    const q = query(collection(db, 'events'), limit(recent ? 3 : 10000), orderBy('createdAt', 'desc'))
+    const q = query(collection(db, 'events'), limit(recent ? 3 : 10000), orderBy('datum', 'desc'))
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const events = snapshot.docs.map((doc) => ({
         id: doc.id,
@@ -31,12 +31,12 @@ const useEvents = () => {
     return () => unsubscribe();
   }
 
-  const addEvent = async (datum, band, city, location, typ, bemerkung) => {
+  const addEvent = async (datum, band, stadt, location, typ, bemerkung) => {
     if (!user) return
     setLoading(true)
     setError(null)
     try {
-      const eventData = { userId: user.uid, datum, band, city, location, typ, bemerkung, createdAt: Timestamp.now() }
+      const eventData = { userId: user.uid, datum, band, stadt, location, typ, bemerkung, createdAt: Timestamp.now() }
       await addDoc(collection(db, 'events'), eventData)
       return { success: true, message: 'Event erfolgreich hinzugefügt' }
     } catch (error) {
