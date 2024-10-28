@@ -6,7 +6,18 @@ import { useEffect } from 'react'
 
 export const Home = () => {
   const { user } = useAuth()
-  const { events, fetchEvents } = useEvents()
+  const { events, exportEvents, importEvents, fetchEvents } = useEvents()
+
+  const handleExport = async () => {
+    await exportEvents()
+  }
+
+  const handleImport = async (event) => {
+    const file = event.target.files[0]
+    if (file) {
+      await importEvents(file)
+    }
+  }
   
   useEffect(() => { fetchEvents(true)}, [user])
 
@@ -23,6 +34,8 @@ export const Home = () => {
             <NavLink to="events/add" type="button" className="btn btn-primary btn-lg rounded-5 px-4">Neues Event hinzufügen</NavLink>
             <NavLink to="events" type="button" className="btn btn-outline-secondary rounded-5 btn-lg px-4">Zum Eventkalender</NavLink>
           </div>
+            <button className="btn btn-warning" onClick={handleExport}>Export</button>
+            <input type="file" accept="application/json" onChange={handleImport} />
         </div>
       </div>
 

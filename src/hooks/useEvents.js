@@ -1,7 +1,8 @@
 import { useState } from "react"
 import useAuth from "./useAuth"
-import { addDoc, collection, deleteDoc, doc, limit, onSnapshot, orderBy, query, Timestamp } from "firebase/firestore"
+import { addDoc, collection, deleteDoc, doc, getDocs, limit, onSnapshot, orderBy, query, Timestamp, where } from "firebase/firestore"
 import { db } from "../config/firebase"
+import { saveAs } from "file-saver"
 
 
 const useEvents = () => {
@@ -55,6 +56,42 @@ const useEvents = () => {
       console.error("Fehler beim Löschen des Events: ", error);
     }
   }
-  return { events, loading, error, fetchEvents, addEvent, deleteEvent }
+
+  // IMPRORT
+  const importEvents = async (file) => {
+    try {
+      const fileContent = await file.text()
+      const eventsData = JSON.parse(fileContent)
+
+      for (const event of eventsData) {
+        await addDoc(collection(db, 'events'), {
+          ...event,
+          userId: user.uid,
+          createdAt: Timestamp.now()
+        })
+      }
+      console.log('Import erfolgreich')
+    } catch (error) {
+      console.error('Fehler beim Import:', error)
+    }
+  }
+
+  // EXPORT
+  const exportEvents = async () => {
+    try {
+      const snapshot = await getDocs(collection(db, 'events'))
+      const data = snapshot.docs
+        .filter(doc => doc.data().userId === user.uid)
+        .map(doc => {        
+        const { createdAt, userId, ...rest } = doc.data();
+        return rest;
+      }); 
+      const jsonBlob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' })
+      saveAs(jsonBlob, 'export.json')      
+    } catch (error) {
+      console.error('Fehler beim Exportieren der Daten:', error)
+    }
+  }
+  return { events, importEvents, exportEvents, loading, error, fetchEvents, addEvent, deleteEvent }
 }
 export default useEvents
