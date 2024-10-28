@@ -4,7 +4,7 @@ import { Outlet, NavLink } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 
 const Navbar = () => {
-  const { user, logout } = useAuth()
+  const { user } = useAuth()
   return (
     <>
       <nav className="navbar fixed-top navbar-expand-sm bg-body-tertiary">

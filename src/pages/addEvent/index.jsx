@@ -9,13 +9,13 @@ export const Add = () => {
   const [ city, setCity ] = useState('')
   const [ location, setLocation ] = useState('')
   const [ type, setType ] = useState('')
-  const [ notes, setNotes ] = useState('')
+  const [ bemerkung, setBemerkung ] = useState('')
 
   const { addEvent } = useEvents()
   const navigate = useNavigate()
 
   const handleSubmit = async () => {
-    const result = await addEvent(date, band, city, location, type, notes)
+    const result = await addEvent(date, band, city, location, type, bemerkung)
     console.log(result.message)
 
     setDate('')
@@ -23,7 +23,7 @@ export const Add = () => {
     setCity('')
     setLocation('')
     setType('')
-    setNotes('')
+    setBemerkung('')
  
     navigate('/events')
   }
@@ -51,7 +51,7 @@ export const Add = () => {
         <label htmlFor="floatingTyp">Typ</label>
       </div>
       <div className="form-floating mb-3">
-        <input type="text" className="form-control" id="floatingBemerkungen" placeholder="Bemerkungen" value={notes} onChange={(e) => setNotes(e.target.value)} />
+        <input type="text" className="form-control" id="floatingBemerkungen" placeholder="Bemerkungen" value={bemerkung} onChange={(e) => setBemerkung(e.target.value)} />
         <label htmlFor="floatingBemerkungen">Bemerkungen</label>
       </div>
       <div className="d-flex justify-content-between">

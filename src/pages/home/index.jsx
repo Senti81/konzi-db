@@ -26,30 +26,30 @@ export const Home = () => {
         </div>
       </div>
 
-    <div className="container">
-      <p className="display-6">Zuletzt hinzugefügt:</p>
-     <div className="row">
-      {events
-        .filter((event) => event.userId === user.uid)
-        .map((event) => (
-        <div className="col-sm-6 col-lg-4 mb-3 mb-sm-3 shadow-md" key={event.id}>
-          <div className="card">
-            <div className="card-body">
-              <h5 className="card-title">{event.band}</h5>
-              <p className="card-text">{event?.notes}</p>
-              <Link
-                to={`/events/${event.id}`}
-                state={{ event }}
-                className="btn btn-outline-info"
-                > Details
-              </Link>
-              <h6 className="card-subtitle text-body-secondary mt-3 small">Added: {event.createdAt.toDate().toLocaleString('de-DE', {dateStyle: 'long'})}</h6>
-            </div>
-          </div>
+        <div className="container">
+          <p className="display-6">Zuletzt hinzugefügt:</p>
+          <div className="row">
+          {events
+            .filter((event) => event.userId === user.uid)
+            .map((event) => (
+            <div className="col-sm-6 col-lg-4 mb-3 mb-sm-3 shadow-md" key={event.id}>
+              <div className="card">
+                <div className="card-body">
+                  <h5 className="card-title">{event.band}</h5>
+                  <p className="card-text">{event?.bemerkung}</p>
+                  <Link
+                    to={`/events/${event.id}`}
+                    state={{ event }}
+                    className="btn btn-outline-info"
+                    > Details
+                  </Link>
+                  <h6 className="card-subtitle text-body-secondary mt-3 small">Added: {event.createdAt.toDate().toLocaleString('de-DE', {dateStyle: 'long'})}</h6>
+                </div>
+              </div>
+            </div>    
+          ))}
         </div>    
-      ))}
-    </div>    
-   </div>
-  </div>
+      </div>
+    </div>
   )
 }

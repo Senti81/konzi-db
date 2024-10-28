@@ -31,12 +31,12 @@ const useEvents = () => {
     return () => unsubscribe();
   }
 
-  const addEvent = async (date, band, city, location, type, notes) => {
+  const addEvent = async (date, band, city, location, type, bemerkung) => {
     if (!user) return
     setLoading(true)
     setError(null)
     try {
-      const eventData = { userId: user.uid, date, band, city, location, type, notes, createdAt: Timestamp.now() }
+      const eventData = { userId: user.uid, date, band, city, location, type, bemerkung, createdAt: Timestamp.now() }
       await addDoc(collection(db, 'events'), eventData)
       return { success: true, message: 'Event erfolgreich hinzugefügt' }
     } catch (error) {
@@ -57,8 +57,9 @@ const useEvents = () => {
     }
   }
 
-  // IMPRORT
+  // IMPORT
   const importEvents = async (file) => {
+    setLoading(true)
     try {
       const fileContent = await file.text()
       const eventsData = JSON.parse(fileContent)
@@ -73,6 +74,8 @@ const useEvents = () => {
       console.log('Import erfolgreich')
     } catch (error) {
       console.error('Fehler beim Import:', error)
+    } finally {
+      setLoading(false)
     }
   }
 
