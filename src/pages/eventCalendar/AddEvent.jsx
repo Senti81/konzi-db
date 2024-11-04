@@ -10,7 +10,7 @@ const AddEvent = () => {
   const [ supportBand, setSupportBand ] = useState('')
   const [ stadt, setStadt ] = useState('')
   const [ location, setLocation ] = useState('')
-  const [ typ, setTyp ] = useState('')
+  const [ typ, setTyp ] = useState('Konzert')
   const [ bemerkung, setBemerkung ] = useState('')
 
   const [error, setError] = useState(null)
@@ -75,9 +75,9 @@ const AddEvent = () => {
           <div className="mt-1 mb-4 ps-2">
             {supportBands.map((band, index) => (
               <span
-              key={index}
-              className="badge rounded-pill bg-success-subtle text-primary-emphasis m-1 px-3 py-2"
-              onClick={() => handleDeleteSupportBand(index)}
+                key={index}
+                className="badge rounded-pill bg-success-subtle text-primary-emphasis m-1 px-3 py-2"
+                onClick={() => handleDeleteSupportBand(index)}
               >
                 {band}
                 <span className="vr mx-2" />

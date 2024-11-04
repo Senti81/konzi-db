@@ -61,7 +61,7 @@ import konzert from '../../icons/konzert.png'
           </div>
         </div>
         <div className="col-md-7">
-          {filteredEvents.length > 0 ? (
+          {filteredEvents.length > 0 && (
             <ul className="list-group mx-3 mx-md-1">
               {filteredEvents
                 .map((event) => (
@@ -87,9 +87,7 @@ import konzert from '../../icons/konzert.png'
                 </Link>
               ))}
             </ul>
-          ) : (
-            <p className="text-muted">Keine Übereinstimmung</p>
-          )}
+            )}
         </div>        
       </div>
     </div>
