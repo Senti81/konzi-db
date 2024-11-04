@@ -6,7 +6,7 @@ import { Link } from "react-router-dom"
 import festival from '../../icons/festival.png'
 import konzert from '../../icons/konzert.png'
 
-export const Events = () => {
+ const EventList = () => {
   const { user } = useAuth()
   const { events, fetchEvents } = useEvents()
 
@@ -95,3 +95,5 @@ export const Events = () => {
     </div>
   )
 }
+
+export default EventList

@@ -6,12 +6,12 @@ import Login from './components/Login'
 import Spinner from './components/Spinner'
 import Navbar from './components/Navbar'
 
-import { Home } from './pages/home/index'
-import { Events } from './pages/events/index'
-import { Event } from './pages/event/index'
-import { Add } from './pages/addEvent/index'
-import { Edit } from './pages/editEvent/index'
-import { Profile } from './pages/profile/index'
+import Home from './pages/Home'
+import EventList from './pages/eventCalendar/EventList'
+import EventDetails from './pages/eventCalendar/EventDetails'
+import AddEvent from './pages/eventCalendar/AddEvent'
+import EditEvent from './pages/eventCalendar/EditEvent'
+import Profile from './pages/profile/Profile'
 
 function App() {
   const { user, loading } = useAuth()
@@ -27,10 +27,10 @@ function App() {
             <Route path='/' element={<Navbar />}>
               <Route index element={<Home />} />
               <Route path='profile' element={<Profile />} />
-              <Route path='events' element={<Events />} />
-              <Route path='events/add' element={<Add />} />
-              <Route path='events/:id' element={<Event />} />
-              <Route path='events/:id/edit' element={<Edit />} />
+              <Route path='events' element={<EventList />} />
+              <Route path='events/add' element={<AddEvent />} />
+              <Route path='events/:id' element={<EventDetails />} />
+              <Route path='events/:id/edit' element={<EditEvent />} />
             </Route>
           </Routes>
         </div>

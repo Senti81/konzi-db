@@ -1,7 +1,7 @@
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import useEvents from "../../hooks/useEvents"
 
-export const Event = () => {
+const EventDetails = () => {
   const location = useLocation()
   const event = location.state?.event
 
@@ -40,3 +40,5 @@ export const Event = () => {
     </div>
   )
 }
+
+export default EventDetails

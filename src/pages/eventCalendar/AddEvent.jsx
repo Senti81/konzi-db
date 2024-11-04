@@ -2,7 +2,7 @@ import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import useEvents from "../../hooks/useEvents"
 
-export const Add = () => {
+const AddEvent = () => {
 
   const [ datum, setDatum ] = useState('')
   const [ band, setBand ] = useState('')
@@ -73,3 +73,5 @@ export const Add = () => {
     </div>
   )
 }
+
+export default AddEvent

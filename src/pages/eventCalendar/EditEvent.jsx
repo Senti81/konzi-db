@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom"
 
-export const Edit = () => {
+const EditEvent = () => {
   const location = useLocation()
   const event = location.state?.event
   
@@ -14,3 +14,5 @@ export const Edit = () => {
     </div>
   )
 }
+
+export default EditEvent

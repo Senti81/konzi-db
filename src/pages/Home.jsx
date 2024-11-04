@@ -1,10 +1,10 @@
 import { Link, NavLink } from 'react-router-dom'
-import pic from '../../icons/logo.webp'
-import useAuth from '../../hooks/useAuth'
-import useEvents from '../../hooks/useEvents'
+import pic from '../icons/logo.webp'
+import useAuth from '../hooks/useAuth'
+import useEvents from '../hooks/useEvents'
 import { useEffect } from 'react'
 
-export const Home = () => {
+const Home = () => {
   const { user } = useAuth()
   const { events, fetchEvents } = useEvents()
  
@@ -53,3 +53,5 @@ export const Home = () => {
     </div>
   )
 }
+
+export default Home
