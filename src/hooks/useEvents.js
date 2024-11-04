@@ -31,12 +31,12 @@ const useEvents = () => {
     return () => unsubscribe();
   }
 
-  const addEvent = async (datum, band, stadt, location, typ, bemerkung) => {
+  const addEvent = async (datum, band, supportBands, stadt, location, typ, bemerkung) => {
     if (!user) return
     setLoading(true)
     setError(null)
     try {
-      const eventData = { userId: user.uid, datum, band, stadt, location, typ, bemerkung, createdAt: Timestamp.now() }
+      const eventData = { userId: user.uid, datum, band, supportBands, stadt, location, typ, bemerkung, createdAt: Timestamp.now() }
       await addDoc(collection(db, 'events'), eventData)
       return { success: true, message: 'Event erfolgreich hinzugefügt' }
     } catch (error) {
