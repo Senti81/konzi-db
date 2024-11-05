@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import useEvents from "../../hooks/useEvents"
+import SupportBandList from "../../components/SupportBandList"
 
 const AddEvent = () => {
 
@@ -72,19 +73,10 @@ const AddEvent = () => {
         </div>
 
         { error ? <div className="text-danger mb-3">{error}</div> : (
-          <div className="mt-1 mb-4 ps-2">
-            {supportBands.map((band, index) => (
-              <span
-                key={index}
-                className="badge rounded-pill bg-success-subtle text-primary-emphasis m-1 px-3 py-2"
-                onClick={() => handleDeleteSupportBand(index)}
-              >
-                {band}
-                <span className="vr mx-2" />
-                <i className='bi bi-x-circle-fill' />
-              </span>
-            ))}
-          </div>
+          <SupportBandList
+            supportBands={supportBands}
+            handleDeleteSupportBand={handleDeleteSupportBand}
+          />
         )}
 
         <div className="input-group mb-3">
