@@ -1,12 +1,8 @@
 import useEvents from "../hooks/useEvents"
 
 const ExportData = () => {
-
   const { exportEvents } = useEvents()
-
-  const handleExport = async () => {
-    await exportEvents()
-  }
+  const handleExport = async () => await exportEvents()
 
   return (
     <div className="col-sm-6 col-lg-4 mb-3 mb-sm-3">

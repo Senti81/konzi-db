@@ -1,7 +1,7 @@
-import React from 'react';
+import React from 'react'
 import brand from '../icons/brand.png'
-import { Outlet, NavLink } from 'react-router-dom';
-import useAuth from '../hooks/useAuth';
+import { Outlet, NavLink } from 'react-router-dom'
+import useAuth from '../hooks/useAuth'
 
 const Navbar = () => {
   const { user } = useAuth()
@@ -48,6 +48,6 @@ const Navbar = () => {
       <Outlet />
     </>
   )
-};
+}
 
 export default Navbar

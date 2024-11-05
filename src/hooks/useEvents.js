@@ -107,6 +107,27 @@ const useEvents = () => {
       console.error('Fehler beim Exportieren der Daten:', error)
     }
   }
-  return { events, importEvents, exportEvents, loading, error, fetchEvents, addEvent, deleteEvent }
+
+  const filteredEvents = (events, user, searchTerm) => {
+    return events.filter(
+      (event) => event.userId === user.uid && (
+        (event.band && event.band.toLowerCase().includes(searchTerm.toLowerCase())) ||
+        (event.stadt && event.stadt.toLowerCase().includes(searchTerm.toLowerCase())) ||
+        (event.location && event.location.toLowerCase().includes(searchTerm.toLowerCase()))
+      )
+    )    
+  }
+
+  return {
+    events,
+    loading,
+    error,
+    filteredEvents,
+    importEvents,
+    exportEvents,
+    fetchEvents,
+    addEvent,
+    deleteEvent
+   }
 }
 export default useEvents

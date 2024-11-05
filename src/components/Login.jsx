@@ -1,7 +1,7 @@
-import React from 'react';
+import React from 'react'
 import '../styles/login.css'
 import logo from '../icons/logo.webp'
-import useAuth from '../hooks/useAuth';
+import useAuth from '../hooks/useAuth'
 
 const Login = () => {
   const { login } = useAuth()
@@ -21,4 +21,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Login
