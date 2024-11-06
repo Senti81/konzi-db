@@ -1,6 +1,6 @@
 import React from 'react'
 import '../styles/login.css'
-import logo from '../icons/logo.webp'
+import logo from '../icons/brand.png'
 import useAuth from '../hooks/useAuth'
 
 const Login = () => {

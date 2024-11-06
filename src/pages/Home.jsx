@@ -1,5 +1,5 @@
 import { Link, NavLink } from 'react-router-dom'
-import pic from '../icons/logo.webp'
+import pic from '../icons/brand.png'
 import useAuth from '../hooks/useAuth'
 import useEvents from '../hooks/useEvents'
 import { useEffect } from 'react'
@@ -14,7 +14,7 @@ const Home = () => {
     <div className="container mt-1">
       <div className="d-flex flex-wrap flex-column flex-lg-row align-items-center px-4 py-5 mb-5 text-center rounded-3 border shadow-lg">
         <div className="col-lg-6 text-end mb-4 mb-lg-0">
-          <img className="d-block mx-auto rounded shadow-lg" src={pic} alt="" width="50%" />
+          <img className="d-block mx-auto rounded shadow-lg" src={pic} alt="" />
         </div>
         <div className="col-lg-6 text-start">
           <h1 className="display-5 fw-bold text-body-emphasis">Hey {user?.displayName.split(' ')[0]}</h1>

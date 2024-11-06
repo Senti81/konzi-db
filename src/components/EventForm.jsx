@@ -41,11 +41,11 @@ const EventForm = ({ event = {} }) => {
     }
 
     let result
-    event.id ?
-      result = await updateEvent(event.id, datum, band, supportBands, stadt, location, typ, bemerkung)
-      :
-      result = await addEvent(datum, band, supportBands, stadt, location, typ, bemerkung)
-    
+    if (event.id) {
+      result = await updateEvent(event.id, datum, band, supportBands, stadt, location, typ, bemerkung);
+    } else {
+      result = await addEvent(datum, band, supportBands, stadt, location, typ, bemerkung);
+    }
 
     if (result) {
       setDatum('')
