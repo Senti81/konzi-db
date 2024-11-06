@@ -16,7 +16,7 @@ const EventForm = ({ event = {} }) => {
 
   const [error, setError] = useState(null)
 
-  const { addEvent, updateEvent } = useEvents()
+  const { addEvent, updateEvent, deleteEvent } = useEvents()
   const navigate = useNavigate()
 
   const handleAddSupportBand = () => {
@@ -29,6 +29,8 @@ const EventForm = ({ event = {} }) => {
     }
   }
 
+  const handleDelete = async () => await deleteEvent(event.id)
+
   const handleDeleteSupportBand = (index) => {
     setSupportBands(supportBands.filter((_, i) => i !== index))
   }
@@ -36,9 +38,6 @@ const EventForm = ({ event = {} }) => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     if (error) return
-    const payload = {
-      datum, band, supportBands, stadt, location, typ, bemerkung
-    }
 
     let result
     if (event.id) {
@@ -108,14 +107,20 @@ const EventForm = ({ event = {} }) => {
       </div>
 
       <div className="d-flex justify-content-between">
-        <button className="btn btn-primary rounded" type="submit">
+        <button className="btn btn-outline-secondary rounded" type="submit">
           <i className="bi bi-check-lg me-2"></i>
-          Speichern</button>
-        <Link to={'..'} relative="path" state={{ event }} className="btn btn-outline-secondary rounded">
+          Speichern
+        </button>
+        <Link to={'..'} relative="path" state={{ event }} className="btn btn-primary rounded">
           <i className="bi bi-x-lg me-2"></i>
-
           Abbrechen
-          </Link>
+        </Link>
+        { event.id &&
+        <button className="btn btn-outline-danger" onClick={handleDelete}>
+          <i className="bi bi-trash me-2"></i>
+          Löschen
+        </button>
+        }
       </div>        
     </form>
   )

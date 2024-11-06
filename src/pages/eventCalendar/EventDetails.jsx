@@ -48,13 +48,13 @@ const EventDetails = () => {
           <Link
             to={`/events/${event.id}/edit`}
             state={{ event }}
-            className="btn btn-warning"
+            className="btn btn-outline-secondary"
             >
               <i className="bi bi-pencil me-2"></i>
 
             Bearbeiten
           </Link>
-          <Link to={'..'} relative="path" className="btn btn-outline-secondary">
+          <Link to={'..'} relative="path" className="btn btn-primary">
             <i className="bi bi-arrow-counterclockwise me-2"></i>
             Zurück
           </Link>
