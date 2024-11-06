@@ -4,33 +4,38 @@ import konzert from '../icons/konzert.png'
 
 const SingleEvent = ({ event }) => {
 
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('de-DE', {
+  const formatDate = (d) => {
+    return new Date(d).toLocaleDateString('de-DE', {
       day: 'numeric',
-      month: 'short',
+      month: 'numeric',
       year: 'numeric'
     })
   }
 
   return (
-      <Link
-        to={`/events/${event.id}`}
-        className="list-group-item list-group-item-action d-flex gap-3 py-3"            
-        state={{ event }}
-      >
-      <img src={event.typ === 'Festival' ? festival : konzert} alt="twbs" width="40px" height="40px" className="rounded-circle flex-shrink-0" />
+    <Link
+      to={`/events/${event.id}`}
+      className="list-group-item list-group-item-action d-flex gap-1 py-2 align-items-center"            
+      state={{ event }}
+    >
+      <img
+        src={event.typ === 'Festival' ? festival : konzert}
+        alt="Helgaaaa" 
+        width="32px" 
+        height="32px" 
+        className="rounded-2 flex-shrink-0 me-2"
+      />
       <div className="d-flex gap-2 w-100 justify-content-between">
         <div>
           <h6 className="mb-0">{event.band}</h6>
           <p className="mb-0 opacity-75">
-            <i className="bi bi-globe-americas pe-1"></i>
-              <small>{event.stadt}</small>
-            <i className="bi bi-geo-alt ms-3 pe-1"></i>
-            <small>{event.location}</small>
+            <i className="bi bi-geo-alt pe-1"></i>
+            <small>{event.stadt} / {event.location}</small>
           </p>
         </div>
-        <small className="opacity-50 text-nowrap">{formatDate(event.datum)}</small>
+        <span className="badge bg-primary text-light text-nowrap align-self-center">
+        {formatDate(event.datum)}      
+          </span>
       </div>
     </Link>
   )
