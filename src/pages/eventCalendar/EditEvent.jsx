@@ -1,4 +1,5 @@
 import { useLocation } from "react-router-dom"
+import EventForm from "../../components/EventForm"
 
 const EditEvent = () => {
   const location = useLocation()
@@ -6,11 +7,8 @@ const EditEvent = () => {
   
   return (
     <div className="container">
-      {/* Draft Banner */}
-      <div className="alert alert-danger alert-dismissible fade show" role="alert">
-        <strong> ToDo 🤣</strong>
-        <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
+      <div className="display-6 mb-3 text-center">Event bearbeiten</div>
+      <EventForm event={event}/>
     </div>
   )
 }

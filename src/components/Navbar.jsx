@@ -35,7 +35,7 @@ const Navbar = () => {
                 <NavLink className="nav-link px-3" to="profile">
                   <img
                     src={user?.photoURL}
-                    alt="Google Profile"
+                    alt="profilePic"
                     className="profile-pic"
                     style={{ width: '30px', height: '30px', borderRadius: '50%' }}
                   />

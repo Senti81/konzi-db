@@ -16,7 +16,10 @@ const Logout = () => {
         <div className="card-body">
           <h5 className="card-title">Abmelden</h5>
           <p className="card-text"></p>
-          <button className="btn btn-outline-danger" onClick={handleLogout}>Ausloggen</button>
+          <button className="btn btn-outline-danger" onClick={handleLogout}>
+            <i className="bi bi-door-closed me-2"></i>
+            Ausloggen
+          </button>
         </div>
       </div>
     </div>

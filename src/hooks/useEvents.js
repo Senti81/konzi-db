@@ -1,6 +1,6 @@
 import { useState } from "react"
 import useAuth from "./useAuth"
-import { addDoc, collection, deleteDoc, doc, getDocs, limit, onSnapshot, orderBy, query, Timestamp } from "firebase/firestore"
+import { addDoc, collection, deleteDoc, doc, getDocs, limit, onSnapshot, orderBy, query, Timestamp, updateDoc } from "firebase/firestore"
 import { db } from "../config/firebase"
 import { saveAs } from "file-saver"
 
@@ -39,6 +39,22 @@ const useEvents = () => {
       const eventData = { userId: user.uid, datum, band, supportBands, stadt, location, typ, bemerkung, createdAt: Timestamp.now() }
       await addDoc(collection(db, 'events'), eventData)
       return { success: true, message: 'Event erfolgreich hinzugefügt' }
+    } catch (error) {
+      setError(error.message)
+      return { success: false, message: error.message }
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const updateEvent = async (eventId, datum, band, supportBands, stadt, location, typ, bemerkung) => {
+    if (!user) return
+    setLoading(true)
+    setError(null)
+    try {
+      const eventData = { datum, band, supportBands, stadt, location, typ, bemerkung, updatedAt: Timestamp.now() }
+      await updateDoc(doc(db, 'events', eventId), eventData)
+      return { success: true, message: 'Event erfolgreich aktualisiert' }
     } catch (error) {
       setError(error.message)
       return { success: false, message: error.message }
@@ -127,6 +143,7 @@ const useEvents = () => {
     exportEvents,
     fetchEvents,
     addEvent,
+    updateEvent,
     deleteEvent
    }
 }

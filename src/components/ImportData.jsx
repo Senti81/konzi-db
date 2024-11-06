@@ -36,7 +36,10 @@ const ImportData = () => {
               <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
           )}
-          <button className="btn btn-outline-primary" disabled={!selectedFile} onClick={handleImport}>Importieren</button>
+          <button className="btn btn-outline-primary" disabled={!selectedFile} onClick={handleImport}>
+            <i className="bi bi-upload me-2"></i>
+            Importieren
+          </button>
         </div>
       </div>
     </div> 

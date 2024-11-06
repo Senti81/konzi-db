@@ -9,7 +9,7 @@ const ProfileDetails = () => {
         <div className="me-3">
           <img 
             src={user?.photoURL} 
-            alt="UserPic" 
+            alt="pic" 
             className="rounded-circle" 
             style={{ width: '80px', height: '80px', objectFit: 'cover' }}
           />
