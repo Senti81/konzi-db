@@ -125,11 +125,13 @@ const useEvents = () => {
   }
 
   const filteredEvents = (events, user, searchTerm) => {
+    const searchString = searchTerm.toLowerCase()
     return events.filter(
       (event) => event.userId === user.uid && (
-        (event.band && event.band.toLowerCase().includes(searchTerm.toLowerCase())) ||
-        (event.stadt && event.stadt.toLowerCase().includes(searchTerm.toLowerCase())) ||
-        (event.location && event.location.toLowerCase().includes(searchTerm.toLowerCase()))
+        (event.band && event.band.toLowerCase().includes(searchString)) ||
+        (event.stadt && event.stadt.toLowerCase().includes(searchString)) ||
+        (event.supportBands && event.supportBands.some(supportBand => supportBand.toLowerCase().includes(searchString))) ||
+        (event.location && event.location.toLowerCase().includes(searchString))
       )
     )    
   }
