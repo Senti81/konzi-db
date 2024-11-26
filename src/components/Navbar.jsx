@@ -10,20 +10,33 @@ const Navbar = () => {
       <nav className="navbar fixed-top navbar-expand-sm bg-body-tertiary">
         <div className='container-fluid'>
           <div className="navbar-collapse d-flex align-items-center justify-content-between" id="navbarNav">
-            <a className="navbar-brand" href="/">
+            <NavLink className="navbar-brand" to="/">
               <img src={brand} className='rounded-2' alt="Konzi DB" width="30" height="30"/>
-            </a>
+            </NavLink>
             <ul className="navbar-nav flex-row">
+
               <li className='nav-item d-none d-sm-block'>
                 <NavLink className={({ isActive }) => `nav-link ${isActive ? 'border-bottom border-black border-1' : ''}`} to="events">
                   Eventkalender
                 </NavLink>              
               </li>             
+              {/* <li className='nav-item d-none d-sm-block'>
+                <NavLink className={({ isActive }) => `nav-link ${isActive ? 'border-bottom border-black border-1' : ''}`} to="statistics">
+                  Statistiken
+                </NavLink>              
+              </li>     */}
+
               <li className="nav-item d-block d-sm-none">
                 <NavLink className={({ isActive }) => `nav-link rounded px-3 ${isActive ? 'bg-secondary text-light' : ''}`} to="events">
                   <i className="bi bi-calendar-event"></i>
                 </NavLink>
               </li>             
+              {/* <li className="nav-item d-block d-sm-none">
+                <NavLink className={({ isActive }) => `nav-link rounded px-3 ${isActive ? 'bg-secondary text-light' : ''}`} to="statistics">
+                  <i className="bi bi-123"></i>
+                </NavLink>
+              </li>    */}
+
             </ul>
             <ul className='navbar-nav ms-auto'>
               <li className="nav-item d-none d-sm-block">

@@ -1,21 +1,35 @@
 import { useState } from "react"
 import useAuth from "./useAuth"
-import { addDoc, collection, deleteDoc, doc, getDocs, limit, onSnapshot, orderBy, query, Timestamp, updateDoc } from "firebase/firestore"
+import { addDoc, collection, deleteDoc, doc, getDocs, onSnapshot, orderBy, query, Timestamp, updateDoc, where } from "firebase/firestore"
 import { db } from "../config/firebase"
 import { saveAs } from "file-saver"
-
+import useGroups from "./useGroups"
 
 const useEvents = () => {
   const [loading, setLoading] = useState(null)
   const [error, setError] = useState(null)
   const [events, setEvents] = useState([])
+
+  const { fetchGroup } = useGroups()
   const { user } = useAuth()
 
-  const fetchEvents = (recent = false) => {
+  const fetchEvents = async () => {
     if (!user) return
     setLoading(true)
     setError(null)
-    const q = query(collection(db, 'events'), limit(recent ? 3 : 10000), orderBy('datum', 'desc'))
+
+    let displayIds = [user.uid]
+    const result = await fetchGroup()
+    if (result.active)
+      displayIds = [...displayIds, ...result.linkedIds]
+
+    const q = query
+      (
+        collection(db, 'events'),
+        where('userId', 'in', displayIds),
+        orderBy('datum', 'desc')
+      )
+
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const events = snapshot.docs.map((doc) => ({
         id: doc.id,
@@ -124,15 +138,14 @@ const useEvents = () => {
     }
   }
 
-  const filteredEvents = (events, user, searchTerm) => {
+  const filteredEvents = (events, searchTerm) => {
     const searchString = searchTerm.toLowerCase()
     return events.filter(
-      (event) => event.userId === user.uid && (
+      (event) => 
         (event.band && event.band.toLowerCase().includes(searchString)) ||
         (event.stadt && event.stadt.toLowerCase().includes(searchString)) ||
         (event.supportBands && event.supportBands.some(supportBand => supportBand.toLowerCase().includes(searchString))) ||
         (event.location && event.location.toLowerCase().includes(searchString))
-      )
     )    
   }
 
@@ -146,7 +159,7 @@ const useEvents = () => {
     fetchEvents,
     addEvent,
     updateEvent,
-    deleteEvent
+    deleteEvent    
    }
 }
 export default useEvents
