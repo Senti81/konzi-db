@@ -143,6 +143,7 @@ const useEvents = () => {
     return events.filter(
       (event) => 
         (event.band && event.band.toLowerCase().includes(searchString)) ||
+        (event.datum && event.datum.toLowerCase().includes(searchString)) ||
         (event.stadt && event.stadt.toLowerCase().includes(searchString)) ||
         (event.supportBands && event.supportBands.some(supportBand => supportBand.toLowerCase().includes(searchString))) ||
         (event.location && event.location.toLowerCase().includes(searchString))
