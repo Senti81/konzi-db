@@ -1,59 +1,38 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import useGroups from '../hooks/useGroups'
-import useAuth from '../hooks/useAuth'
 
 const Groups = () => {
-  const { group, groups, fetchGroup, fetchGroups, toggleGroupActive } = useGroups()
-  const [active, setActive] = useState(false)
-  const { user } = useAuth()
+  const { connectUsers } = useGroups()
 
-  useEffect(() => {
-    if (group?.active !== undefined)
-      setActive(group.active)
-  }, [group])
+  const [currentUser, setCurrentUser] = useState('')
+  const [connectedUser, setConnectedUser] = useState('')
+  const [message, setMessage] = useState('')
 
-  useEffect(() => {
-    fetchGroup()
-  }, [user])
-
-  useEffect(() => {
-    fetchGroups()
-  }, [])
-
-  const toggle = () => {
-    setActive(!active)
-    toggleGroupActive(active)
-  }
-
-  const addGroupMember = (id) => {
-    console.log(id)
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    const result = await connectUsers(currentUser, connectedUser)
+    setMessage(result.message)
   }
 
   return (
     <div className="col-sm-6 col-lg-4 mb-3 mb-sm-3">
       <div className="h-100 card shadow">
         <div className="card-body">
-          <h5 className="card-title">Gruppen <span className="badge text-bg-secondary">Neu</span></h5>
-            <ul>
-              {groups.map((group) => user.uid !== group.id && <li>{group.displayName}</li>)}
-            </ul>            
-          <div className="form-check form-switch">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              role="switch"
-              id="flexSwitchCheckDefault"
-              checked={active}
-              onChange={toggle}
-            />
-            <label
-              className="form-check-label"
-              htmlFor="flexSwitchCheckDefault"
-            > 
-              {!active ? 'Nur eigene Events anzeigen' : 'Events von Freunden anzeigen'}
-            </label>
-          </div>
-        </div>
+          <h5 className="card-title">Events teilen</h5>
+          <p className="card-text"><small>Teile deine Events mit anderen</small></p>
+          <form onSubmit={handleSubmit}>  
+            <div className="input-group mb-3">
+              <input type="text" className="form-control" placeholder="Wer teilt ?" value={currentUser} onChange={(e) => setCurrentUser(e.target.value)}/>
+            </div>        
+            <div className="input-group mb-3">
+              <input type="text" className="form-control" placeholder="Mit wem ?" value={connectedUser} onChange={(e) => setConnectedUser(e.target.value)}/>
+            </div>
+            <button className="btn btn-outline-secondary rounded d-inline d-sm-none" type="submit">
+              <i className="bi bi-check-lg px-1"/>Aktivieren
+            </button>
+          </form>
+          <strong className='my-2'>{message}</strong>
+        </div>        
       </div>
     </div>
   )

@@ -22,7 +22,7 @@ const ImportData = () => {
   }
 
   return (
-    <div className="col-sm-6 col-lg-4 mb-3 mb-sm-3">
+    <div className="col-sm-6 col-lg-4 mb-3 mb-sm-3 d-none d-lg-flex">
       <div className="h-100 card shadow">
         <div className="card-body">
           <h5 className="card-title">Daten importieren</h5>

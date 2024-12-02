@@ -20,10 +20,12 @@ const useEvents = () => {
         
     const result = await fetchGroup()
     if (!result) return
+    
+    const userIds = result.displayUser.map(user => user.id)
     const q = query
       (
         collection(db, 'events'),
-        where('userId', 'in', result.linkedIds),
+        where('userId', 'in', userIds),
         orderBy('datum', 'desc')
       )
 

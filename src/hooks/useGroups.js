@@ -1,6 +1,6 @@
 import { useState } from "react"
 import useAuth from "./useAuth"
-import { collection, doc, getDoc, getDocs, setDoc, Timestamp, updateDoc } from "firebase/firestore"
+import { arrayUnion, collection, doc, getDoc, getDocs, setDoc, Timestamp, updateDoc } from "firebase/firestore"
 import { db } from "../config/firebase"
 
 const useGroups = () => {
@@ -16,29 +16,17 @@ const useGroups = () => {
       if (!docSnap.exists()){
         await setDoc(docRef, {
           displayName: user.displayName,
-          active: false,
-          linkedIds: [user.uid],
+          displayUser: [
+            { name: user.displayName,
+              id: user.uid
+            }
+          ],
           createdAt: Timestamp.now()
         })        
       }
     } catch (error) {
       console.error(error)
     }
-  }
-
-  const fetchGroups = async() => {
-    const groups = await getDocs(collection(db, 'groups'))
-
-    const result = []
-    groups.forEach(doc => {
-      result.push({
-        id: doc.id,
-        active: doc.data().active,
-        displayName: doc.data().displayName,
-        linkedIds: doc.data().linkedIds
-      })
-    })
-    setGroups(result)
   }
 
   const fetchGroup = async() => {
@@ -57,11 +45,30 @@ const useGroups = () => {
     }
   }
 
-  const toggleGroupActive = async (value) => {
-    await updateDoc(doc(db, 'groups', user.uid), { active: !value })
+  const connectUsers = async(userLinkedFrom, userLinkedTo) => {
+    try {
+      const groups = await getDocs(collection(db, 'groups'))
+      let displayUser = null
+      let id = null
+      groups.forEach(doc => {
+        if (userLinkedFrom === doc.data().displayName) {
+          displayUser = { id: doc.id, name: doc.data().displayName }
+        }
+        if (userLinkedTo === doc.data().displayName) {
+          id = doc.id
+        }
+      })
+      if (!displayUser || !id) return { success: false, message: 'Benutzer nicht gefunden'}
+
+      const updateRef = doc(db, 'groups', id)
+      await updateDoc(updateRef, { displayUser: arrayUnion(displayUser) })
+      return { success: true, message: 'Erfolgreich verknüpft'}
+    } catch (error) {
+      return { success: false, message: error}
+    }
   }
 
-  return { group, groups, createGroup, fetchGroup, fetchGroups, toggleGroupActive }
+  return { group, groups, createGroup, fetchGroup, connectUsers }
 }
 
 export default useGroups
