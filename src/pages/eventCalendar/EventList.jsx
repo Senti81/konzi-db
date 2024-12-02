@@ -6,14 +6,12 @@ import Spinner from '../../components/Spinner'
 import SearchEvents from "../../components/SearchEvents"
 import EventResultList from "../../components/EventResultList"
 import { Link } from "react-router-dom"
-import useGroups from "../../hooks/useGroups"
 
- const EventList = () => {
+const EventList = () => {
   const [searchTerm, setSearchTerm] = useState('')
   
   const { user } = useAuth()
   const { events, loading, fetchEvents, filteredEvents } = useEvents()
-  const { group, fetchGroup } = useGroups()
 
   useEffect(() => {
     fetchEvents()

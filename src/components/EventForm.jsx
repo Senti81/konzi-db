@@ -107,48 +107,39 @@ const EventForm = ({ event = {} }) => {
       </div>
 
       <div className="d-flex justify-content-between">
-
-        <button className="btn btn-outline-secondary rounded d-none d-sm-inline-flex" type="submit">
-          <i className="bi bi-check-lg me-2"></i>
-          Speichern
-        </button>
-        
-        <button className="btn btn-outline-secondary rounded d-inline d-sm-none" type="submit">
-          <i className="bi bi-check-lg px-1"></i>          
-        </button>
-
+        <button className="btn btn-outline-secondary rounded d-none d-sm-inline-flex" type="submit">Speichern</button>        
         <Link 
           to={'..'}
           relative="path"
           state={{ event }}
           className="btn btn-primary rounded d-none d-sm-inline-flex"
         >
-          <i className="bi bi-x-lg me-2"></i>
           Abbrechen
         </Link>
 
+        { event.id &&          
+          <button className="btn btn-outline-danger d-none d-sm-inline-flex" onClick={handleDelete}>Löschen</button>
+        }
+      </div>
+
+      <div className="d-flex flex-column gap-3 mx-3">
+        <button className="btn btn-outline-secondary rounded d-inline d-sm-none" type="submit">
+          <i className="bi bi-check-lg px-1"/>Speichern
+        </button>
         <Link
           to={'..'} 
           relative="path" 
           state={{ event }} 
           className="btn btn-primary rounded d-inline d-sm-none"
         >
-          <i className="bi bi-x-lg px-2"></i>
-        </Link>
-        
+          <i className="bi bi-x-lg px-2"/>Abbrechen
+        </Link>              
         { event.id &&
-          <>
-            <button className="btn btn-outline-danger d-none d-sm-inline-flex" onClick={handleDelete}>
-              <i className="bi bi-trash me-2"></i>
-              Löschen
-            </button>
-
-            <button className="btn btn-outline-danger d-inline d-sm-none" onClick={handleDelete}>
-              <i className="bi bi-trash px-2"></i>              
-            </button>          
-          </>
+          <button className="btn btn-outline-danger d-inline d-sm-none mt-5" onClick={handleDelete}>
+            <i className="bi bi-trash px-2"/>Löschen
+          </button>
         }
-      </div>        
+      </div>
     </form>
   )
 }

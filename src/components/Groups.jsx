@@ -3,7 +3,7 @@ import useGroups from '../hooks/useGroups'
 import useAuth from '../hooks/useAuth'
 
 const Groups = () => {
-  const { group, fetchGroup, toggleGroupActive } = useGroups()
+  const { group, groups, fetchGroup, fetchGroups, toggleGroupActive } = useGroups()
   const [active, setActive] = useState(false)
   const { user } = useAuth()
 
@@ -16,9 +16,17 @@ const Groups = () => {
     fetchGroup()
   }, [user])
 
+  useEffect(() => {
+    fetchGroups()
+  }, [])
+
   const toggle = () => {
     setActive(!active)
     toggleGroupActive(active)
+  }
+
+  const addGroupMember = (id) => {
+    console.log(id)
   }
 
   return (
@@ -26,7 +34,9 @@ const Groups = () => {
       <div className="h-100 card shadow">
         <div className="card-body">
           <h5 className="card-title">Gruppen <span className="badge text-bg-secondary">Neu</span></h5>
-
+            <ul>
+              {groups.map((group) => user.uid !== group.id && <li>{group.displayName}</li>)}
+            </ul>            
           <div className="form-check form-switch">
             <input
               className="form-check-input"

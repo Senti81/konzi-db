@@ -19,7 +19,9 @@ const useEvents = () => {
     setError(null)
 
     let displayIds = [user.uid]
+
     const result = await fetchGroup()
+    if (!result) return
     if (result.active)
       displayIds = [...displayIds, ...result.linkedIds]
 

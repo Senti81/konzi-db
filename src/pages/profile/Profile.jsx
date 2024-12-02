@@ -10,7 +10,7 @@ const Profile = () => {
       <ProfileDetails />
       <hr className="my-3"/>
       <div className="row">
-        <Groups />
+        {/* <Groups /> */}
         <ExportData />
         <ImportData />
         <Logout />
