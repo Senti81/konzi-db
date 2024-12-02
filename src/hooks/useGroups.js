@@ -6,7 +6,7 @@ import { db } from "../config/firebase"
 const useGroups = () => {
   const { user } = useAuth()
   const [group, setGroup] = useState(null)
-  const [groups, setGroups] = useState([])
+  const [users, setUsers] = useState(null)
 
   const createGroup = async() => {
     if (!user) return
@@ -45,30 +45,41 @@ const useGroups = () => {
     }
   }
 
+  const fetchUsers = async () => {
+    try {
+      const groupsSnapshot = await getDocs(collection(db, 'groups'))
+      const users = groupsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+      setUsers(users)
+    } catch (error) {
+      
+    }
+  }
   const connectUsers = async(userLinkedFrom, userLinkedTo) => {
     try {
-      const groups = await getDocs(collection(db, 'groups'))
-      let displayUser = null
-      let id = null
-      groups.forEach(doc => {
-        if (userLinkedFrom === doc.data().displayName) {
-          displayUser = { id: doc.id, name: doc.data().displayName }
-        }
-        if (userLinkedTo === doc.data().displayName) {
-          id = doc.id
-        }
-      })
-      if (!displayUser || !id) return { success: false, message: 'Benutzer nicht gefunden'}
+      const groupsSnapshot = await getDocs(collection(db, 'groups'))
+      const groups = groupsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
 
-      const updateRef = doc(db, 'groups', id)
-      await updateDoc(updateRef, { displayUser: arrayUnion(displayUser) })
+      const displayUser = groups.find(group => group.displayName === userLinkedFrom)
+      const targetGroupId = groups.find(group => group.displayName === userLinkedTo)?.id
+
+      if (!displayUser || !targetGroupId) 
+        return { success: false, message: 'Benutzer nicht gefunden'}
+
+      const updateRef = doc(db, 'groups', targetGroupId)
+      await updateDoc(updateRef, { 
+        displayUser: arrayUnion({
+          id: displayUser.id,
+          name: displayUser.displayName
+        })
+      })
+
       return { success: true, message: 'Erfolgreich verknüpft'}
     } catch (error) {
       return { success: false, message: error}
     }
   }
 
-  return { group, groups, createGroup, fetchGroup, connectUsers }
+  return { group, users, fetchUsers, createGroup, fetchGroup, connectUsers }
 }
 
 export default useGroups
