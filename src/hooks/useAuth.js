@@ -6,11 +6,13 @@ const useAuth = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null)
+  const [isAdmin, setAdmin] = useState(false)
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
         setUser(currentUser)
+        setAdmin(process.env.REACT_APP_ADMIN_UID === currentUser.uid)
       } else {
         setUser(null);
         setError(true)
@@ -44,7 +46,7 @@ const useAuth = () => {
     }
   }
 
-  return { user, login, logout, loading, error };
+  return { user, login, logout, isAdmin, loading, error };
 };
 
 export default useAuth;

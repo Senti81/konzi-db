@@ -17,7 +17,7 @@ const useGroups = () => {
         await setDoc(docRef, {
           displayName: user.displayName,
           active: false,
-          linkedIds: [],
+          linkedIds: [user.uid],
           createdAt: Timestamp.now()
         })        
       }

@@ -17,18 +17,13 @@ const useEvents = () => {
     if (!user) return
     setLoading(true)
     setError(null)
-
-    let displayIds = [user.uid]
-
+        
     const result = await fetchGroup()
     if (!result) return
-    if (result.active)
-      displayIds = [...displayIds, ...result.linkedIds]
-
     const q = query
       (
         collection(db, 'events'),
-        where('userId', 'in', displayIds),
+        where('userId', 'in', result.linkedIds),
         orderBy('datum', 'desc')
       )
 
